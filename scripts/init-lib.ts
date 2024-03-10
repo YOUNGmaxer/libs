@@ -1,6 +1,6 @@
 import prompts from 'prompts'
 import { checkIsFolderExist, checkIsPackageExist } from './helper/checker'
-import { copyFold, getSelectedTemplatePath, getTargetPackagePath } from './helper/file'
+import { copyFold, getSelectedTemplatePath, getTargetPackagePath, renderFiles } from './helper/file'
 
 enum TemplateType {
   ts = 'ts',
@@ -42,6 +42,7 @@ async function startInit() {
   console.log(response)
   if (response.folderName) {
     await copyFold(getSelectedTemplatePath(response.type), getTargetPackagePath(response.folderName))
+    await renderFiles(response.folderName, response)
   }
 }
 

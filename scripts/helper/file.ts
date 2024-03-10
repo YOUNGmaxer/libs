@@ -5,6 +5,8 @@ const BASE_TEMPLATE_PATH = resolve(__dirname, '../../templates')
 const BASE_PACKAGE_PATH = resolve(__dirname, '../../packages')
 /** 不需要拷贝的文件 */
 const IGNORE_FILES = ['SUMMARY.md']
+/** 需要渲染进行内容替换的文件 */
+const NEED_RENDER_FILES = ['package.json', 'README.md']
 
 /** 获取指定的模板路径 */
 export function getSelectedTemplatePath(type: string): string {
@@ -45,4 +47,34 @@ export async function copyFold(from: string, to: string): Promise<void> {
   } catch (err) {
     console.error('copyFold error:', err)
   }
+}
+
+/** 渲染文件（替换文件中指定内容） */
+export async function renderFile(targetFilePath: string, data: object) {
+  try {
+    // 读取文件内容
+    let content = await fs.readFile(targetFilePath, 'utf8')
+
+    // 替换占位符为data对象中对应的值
+    content = content.replace(/{{\s*(\w+)\s*}}/g, (match, key) => {
+      // 如果没有找到匹配的键值，则保留原始占位符
+      return data.hasOwnProperty(key) ? data[key] : match
+    })
+
+    // 将替换后的内容写回文件
+    await fs.writeFile(targetFilePath, content, 'utf8')
+  } catch (err) {
+    console.error('renderFile error:', err)
+  }
+}
+
+/** 渲染指定的文件 */
+export async function renderFiles(folderName: string, data: object) {
+  const destPath = getTargetPackagePath(folderName)
+  const renderTasks: Array<Promise<void>> = []
+  for (const fileName of NEED_RENDER_FILES) {
+    const filePath = join(destPath, fileName)
+    renderTasks.push(renderFile(filePath, data))
+  }
+  await Promise.all(renderTasks)
 }
