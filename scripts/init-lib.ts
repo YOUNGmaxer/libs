@@ -39,7 +39,6 @@ async function startInit() {
     },
   ])
 
-  console.log(response)
   if (response.folderName) {
     await copyFold(getSelectedTemplatePath(response.type), getTargetPackagePath(response.folderName))
     await renderFiles(response.folderName, response)

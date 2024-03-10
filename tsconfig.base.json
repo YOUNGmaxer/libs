@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES6",
-    "module": "ESNext"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   }
 }
