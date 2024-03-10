@@ -4,10 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "init-lib": "bun run ./scripts/init-lib.ts",
     "dev": "vite build --watch"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/prompts": "^2.4.9",
     "changeset": "^0.2.6",
+    "prettier": "^3.2.5",
+    "prompts": "^2.4.2",
     "tsup": "^8.0.2",
     "typescript": "^5.4.2"
   }
