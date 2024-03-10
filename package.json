@@ -1,0 +1,14 @@
+{
+  "name": "libs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "changeset": "^0.2.6",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  }
+}
