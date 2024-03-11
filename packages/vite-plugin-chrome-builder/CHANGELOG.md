@@ -1,5 +1,11 @@
 # vite-plugin-chrome-builder
 
+## 0.0.2
+
+### Patch Changes
+
+- 精简代码
+
 ## 0.0.1
 
 ### Patch Changes

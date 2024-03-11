@@ -11,9 +11,9 @@ export function ChromeExtensionBuilder(option?: Option): Plugin {
   const { base = '' } = option || {}
   return {
     name: 'vite-plugin-chrome-extension-builder',
-    generateBundle(options) {
+    generateBundle() {
       // 指定源文件路径
-      const srcPath = resolve(process.cwd(), base ? `${base}/manifest.json` : 'manifest.json') // 源文件路径，根据实际调整
+      const srcPath = resolve(process.cwd(), base ? `${base}/manifest.json` : 'manifest.json')
       this.emitFile({
         type: 'asset',
         fileName: 'manifest.json',
