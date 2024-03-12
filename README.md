@@ -7,6 +7,8 @@
 ### Vite Plugins
 
 - [ ] Vite-Plugin-Chrome-Extension-Builder  用于开发 Chrome 插件时的构建插件
+  
+  - [ ] 支持 HMR
 
 ## 开发流程
 
