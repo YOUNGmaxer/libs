@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { resolve } from 'path'
 import { Plugin } from 'vite'
+import { startWebSocketServer } from './ws/server'
 
 interface Option {
   /** 路径前缀 */
@@ -11,6 +12,11 @@ export function ChromeExtensionBuilder(option?: Option): Plugin {
   const { base = '' } = option || {}
   return {
     name: 'vite-plugin-chrome-extension-builder',
+
+    configResolved() {
+      startWebSocketServer(7878)
+    },
+
     generateBundle() {
       // 指定源文件路径
       const srcPath = resolve(process.cwd(), base ? `${base}/manifest.json` : 'manifest.json')
