@@ -28,3 +28,5 @@ export function ChromeExtensionBuilder(option?: Option): Plugin {
     },
   }
 }
+
+export * from './ws/client'
