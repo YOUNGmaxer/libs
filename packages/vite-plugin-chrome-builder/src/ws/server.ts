@@ -6,14 +6,14 @@ export const startWebSocketServer = (port: number) => {
   const wss = new WebSocketServer({ port })
 
   wss.on('listening', () => {
-    info(`WebSocket Server Listening on ${wss.options.port}`)
+    info(`Listening on ${wss.options.port}`)
   })
 
   wss.on('connection', (socket) => {
-    info('WebSocket Server Connection')
+    info('Connection')
 
     socket.on('message', (data) => {
-      info('Received Message:', data)
+      info('Received Message:', data.toString())
     })
 
     socket.on('close', () => {
@@ -22,11 +22,11 @@ export const startWebSocketServer = (port: number) => {
   })
 
   wss.on('error', (error) => {
-    info('Start WebSocket Server Error:', error)
+    info('Start Error:', error)
   })
 
   wss.on('close', () => {
-    info('WebSocket Server Closed.')
+    info('Closed.')
   })
 
   return wss

@@ -10,6 +10,10 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "exports": {
+    "./dist/ws/client": {
+      "import": "./dist/ws/client.js",
+      "require": "./dist/ws/client.cjs"
+    },
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
@@ -19,6 +23,7 @@
     "prepublishOnly": "npm run build",
     "dev": "tsup --watch",
     "build": "tsup",
+    "postbuild": "sh ./script/merge-dts.sh",
     "test": "vitest",
     "lint": ""
   },
@@ -27,6 +32,7 @@
     "ws": "^8.16.0"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.266",
     "@types/ws": "^8.5.10"
   }
 }
