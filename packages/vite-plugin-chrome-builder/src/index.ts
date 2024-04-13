@@ -19,8 +19,7 @@ export function ChromeExtensionBuilder(option?: Option): Plugin {
       wss = startWebSocketServer(7878)
     },
 
-    watchChange(id: string) {
-      this.info(`文件(${id})发生变化`)
+    watchChange() {
       wss?.emit('changed')
     },
 
