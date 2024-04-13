@@ -17,7 +17,7 @@ export const startWebSocketClient = (url: string) => {
           const tabId = tabs[0].id
           setTimeout(() => {
             chrome.tabs.reload(tabId)
-          }, 200)
+          }, 500)
         }
       })
     }
