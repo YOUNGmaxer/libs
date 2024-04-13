@@ -1,4 +1,5 @@
 import { WebSocketServer } from 'ws'
+import { Event } from './event'
 
 const info = (...args: any[]) => console.log('[WS Server]', ...args)
 
@@ -7,6 +8,13 @@ export const startWebSocketServer = (port: number) => {
 
   wss.on('listening', () => {
     info(`Listening on ${wss.options.port}`)
+  })
+
+  wss.on('changed', () => {
+    info('Reveived Changed')
+    wss.clients.forEach((client) => {
+      client.send(Event.FileChanged)
+    })
   })
 
   wss.on('connection', (socket) => {

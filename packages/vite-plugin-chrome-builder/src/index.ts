@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { resolve } from 'path'
 import { Plugin } from 'vite'
+import { WebSocketServer } from 'ws'
 import { startWebSocketServer } from './ws/server'
 
 interface Option {
@@ -10,11 +11,17 @@ interface Option {
 
 export function ChromeExtensionBuilder(option?: Option): Plugin {
   const { base = '' } = option || {}
+  let wss: WebSocketServer | null = null
   return {
     name: 'vite-plugin-chrome-extension-builder',
 
     configResolved() {
-      startWebSocketServer(7878)
+      wss = startWebSocketServer(7878)
+    },
+
+    watchChange(id: string) {
+      this.info(`文件(${id})发生变化`)
+      wss?.emit('changed')
     },
 
     generateBundle() {
