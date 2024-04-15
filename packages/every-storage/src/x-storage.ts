@@ -14,7 +14,7 @@ const StorageDrivers: Record<StorageType, any> = {
   [StorageType.WebSession]: null,
 }
 
-export const getStorage = (config: Config): BaseStorage => {
+export const createStorage = (config: Config): BaseStorage => {
   const storage = StorageDrivers[config.type]
   if (!storage) {
     throw new Error(`[${name}] 暂不支持${config.type}类型的存储`)
