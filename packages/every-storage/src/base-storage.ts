@@ -1,10 +1,28 @@
+interface Options {
+  /** 打印日志前缀 */
+  prefix: string
+}
+
+type MaybePromise<T> = T | Promise<T>
+
 export abstract class BaseStorage {
-  abstract get<T>(key: string): T
-  abstract get<T>(key: string): Promise<T>
+  private prefix: string = '[BaseStorage]'
 
-  abstract set(key: string, value: any): void
-  abstract set(key: string, value: any): Promise<void>
+  constructor(options?: Options) {
+    if (options?.prefix) this.prefix = options.prefix
+  }
 
-  abstract remove(key: string): void
-  abstract remove(key: string): Promise<void>
+  protected info(msg: string): void {
+    console.info(`${this.prefix} ${msg}`)
+  }
+
+  protected error(msg: string): void {
+    console.error(`${this.prefix} ${msg}`)
+  }
+
+  abstract get<T>(key: string): MaybePromise<T>
+
+  abstract set(key: string, value: any): MaybePromise<void>
+
+  abstract remove(key: string): MaybePromise<void>
 }

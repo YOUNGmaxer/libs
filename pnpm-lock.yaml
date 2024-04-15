@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 importers:
@@ -32,6 +32,12 @@ importers:
       vite:
         specifier: ^5.1.5
         version: 5.1.5
+
+  packages/every-storage:
+    devDependencies:
+      '@types/chrome':
+        specifier: ^0.0.266
+        version: 0.0.266
 
   packages/vite-plugin-chrome-builder:
     dependencies:
